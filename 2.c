@@ -1,15 +1,13 @@
 #include <stdio.h>
-#include <string.h>
-int main(void) {
-	char str[20];
-	scanf("%s", str); 
-
-	int result = str[0] - '0';
-	for (int i = 1; i< strlen(str); i++) {
-
-		int num = str[i] - '0';
-		if (num <= 1 || result <= 1) result += num;
-		else result *= num;
-	}
-	printf("%d ", result ); 
+int main (void)
+{
+    int n = 1260;
+    int cnt = 0; 
+    int coinType[4] = {500, 100, 50, 10};
+    int size = sizeof(coinType)/sizeof(coinType[0]); 
+    for (int i = 0; i < size; i++) {
+        cnt += n / coinType[i];
+        n %= coinType[i]; 
+    }
+    printf("count = %d" , cnt); 
 }
