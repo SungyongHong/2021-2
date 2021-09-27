@@ -1,20 +1,22 @@
 #include <stdio.h>
-int n, k;
-int result;
-int main(void) {
-	scanf("%d %d", &n, &k );
-	while (1) {
+int main(void)
+{
+    int arr1[] = {6, 0, 8, 2, 3, 0, 4, 0, 1};
+    int n = sizeof(arr1)/sizeof(arr1[0]);
 
-		if ((n % k) == 0 ) {
-			n /= k; 
-		} else {
-			n = n -1; 
-		}
-		result++; 
-		if (n < k) break;
-	}
+    int arr2[n];
+    int j = 0;
+    for (int i=0;i<n;i++)
+    {
+        if(arr1[i]!=0) {
+            arr2[j] = arr1[i];
+            j = i + 1;
+        }
+    }
+    for(int i=j;i<n;i++)
+        arr2[i] = 0;
+    for(int i=0;i<n;i++)
+        printf("%d", arr2[i]);
 
-	result += (n - 1);
-	printf("%d", result);
-	return 0; 
+        return 0;
 }
