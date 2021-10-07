@@ -1,33 +1,9 @@
-from collections import deque
+h = int(input())
 
-def bfs(graph, start, visited):
-
-    queue = deque([start])
-
-    visited[start] = True
-
-    while queue:
-
-        v = queue.popleft()
-        print(v, end=' ')
-
-        for i in graph[v]:
-            if not visited[i]:
-                queue.append(i)
-                visited[i] = True
-
-graph = [
-    [],
-    [2, 3, 8],
-    [1, 7],
-    [1, 4, 5],
-    [3, 5],
-    [3, 4],
-    [7],
-    [2, 6, 8],
-    [1, 7]
-]
-
-visited = [False] * 9
-
-bfs(graph, 1, visited)
+count = 0
+for i in range(h + 1):
+    for j in range(60):
+        for k in range(60):
+            if '3' in str(i) + str(j) + str(k):
+                count += 1
+print(count)

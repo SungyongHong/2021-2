@@ -1,45 +1,27 @@
 #include <bits/stdc++.h>
+
 using namespace std;
-int n, m;
-int graph[1000][1000];
 
-bool dfs(int x, int y) {
+string inputData;
 
-    if (x <= -1 || x >=n || y <= -1 || y >= m) {
-        return false;
-    }
+int dx[] = {-2, -1, 1, 2, 2, 1, -1, -2};
+int dy[] = {-1, -2, -2, -1, 1, 2, 2, 1};
+int main(void) {
 
-    if (graph[x][y] == 0) {
-
-        graph[x][y] = 1;
-
-        dfs(x - 1, y);
-        dfs(x, y - 1);
-        dfs(x + 1, y);
-        dfs(x, y + 1);
-        return true;
-    }
-    return false;
-}
-
-int main() {
-
-    cin >> n >> m;
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            scanf("%1d", &graph[i][j]);
-        }
-    }
+    cin >> inputData;
+    int row = inputData[1] - '0';
+    int column = inputData[0] - 'a' + 1;
 
     int result = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
+    for (int i = 0; i < 8; i++) {
 
-            if (dfs(i, j)) {
-                result += 1;
-            }
+        int nextRow = row + dx[i];
+        int nextColumn = column + dy[i];
+
+        if (nextRow >= 1 && nextRow <= 8 && nextColumn >= 1 && nextColumn <= 8) {
+            result += 1;
         }
     }
     cout << result << '\n';
+    return 0;
 }
