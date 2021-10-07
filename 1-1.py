@@ -1,20 +1,24 @@
-n = int(input())
-x, y = 1, 1
-plans = input().split()
+def dfs(graph, v, visited):
 
-dx = [0, 0, -1, 1]
-dy = [-1, 1, 0, 0]
-move_types = ['L', 'R', 'U', 'D']
+    visited[v] = True
+    print(v, end=' ')
 
-for plan in plans:
-    for i in range(len(move_types)):
-        if plan == move_types[i]:
-            nx = x + dx[i]
-            ny = y + dy[i]
-    
-    if nx < 1 or ny > 1 or nx > n or ny > n:
-        continue
+    for i in graph[v]:
+        if not visited[i]:
+            dfs(graph, i, visited)
 
-    x, y = nx, ny
+graph = [
+    [],
+    [2, 3, 8],
+    [1, 7],
+    [1, 4, 5],
+    [3, 5],
+    [3, 4],
+    [7],
+    [2, 6, 8],
+    [1, 7]
+]
 
-print(x, y)
+visited = [False] * 9
+
+dfs(graph, 1, visited)

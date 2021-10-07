@@ -1,25 +1,25 @@
 import java.util.*;
-
 public class Main {
+    public static boolean[] visited = new boolean[9];
+    public static int[][] graph = {{}, {2,3,8}, {1,7}, {1,4,5}, {3,5}, {3,4}, {7}, {2,6,8}, {1,7}};
 
-    public static boolean check(int h, int m, int s) {
-        if (h % 10 == 3 || m / 10 == 3 || m % 10 == 3 || s / 10 == 3 || s % 10 == 3)
-            return true;
-        return false;
-    }
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void bfs(int start) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(start);
 
-        int h = sc.nextInt();
-        int cnt = 0;
-        for (int i = 0; i <= h; i++) {
-            for (int j = 0; j < 60; j++) {
-                for (int k = 0; k < 60; k++) {
+        visited[start] = true;
 
-                    if (check(i, j, k)) cnt++;
+        while(!q.isEmpty()) {
+
+            int x = q.poll();
+            System.out.print(x + " ");
+
+            for(int node : graph[x]) {
+                if(!visited[node]) {
+                    q.offer(node);
+                    visited[node] = true;
                 }
             }
         }
-        System.out.println(cnt);
     }
 }

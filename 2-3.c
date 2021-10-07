@@ -1,24 +1,25 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-int h, cnt;
-
-bool check(int h, int m, int s) {
-    if (h % 10 == 3 || m / 10 == 3 || m % 10 == 3 || s / 10 == 3 || s % 10 == 3)
-        return true;
-    return false;
-}
-
-int main(void) {
-
-    cin >> h;
-    for (int i = 0; i <= h; i++) {
-        for (int j = 0; j < 60; j++) {
-            for (int k = 0; k < 60; k++) {
-                if (check(i, j, k)) cnt++;
+bool visited[9];
+int graph[9][3] = {{}, {2,3,8}, {1,7}, {1,4,5}, {3,5}, {3,4}, {7}, {2,6,8}, {1,7}};
+void bfs(int start) {
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+    while(!q.empty()) {
+        int x = q.front();
+        q.pop();
+        cout << x << ' ';
+        for(int node : graph[x]) {
+            if(!visited[node]) {
+                q.push(node);
+                visited[node] = true;
             }
         }
     }
-    cout << cnt << '\n';
+}
+
+int main(void) {
+    bfs(1);
     return 0;
 }

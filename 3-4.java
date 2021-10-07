@@ -1,26 +1,52 @@
-import java.util.*;
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+import java.io.*;
+import java.util.Scanner;
+public class Solution {
+    public static int N,M;
+    public static int [][] graph = new int
+[1000][1000];
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
 
-        String inputData = sc.nextLine();
-        int row = inputData.charAt(1) - '0';
-        int column = inputData.charAt(0) - 'a' + 1;
+        N = scanner.nextInt();
+        M = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("+++++++");
+        System.out.println("n " + N + "m" + M);
 
-        int[] dx = {-2, -1, 1, 2, 2, 1, -1, -2};
-        int[] dy = {-1, -2, -2, -1, 1, 2, 2, 1};
-
-        int result = 0;
-        for (int i = 0; i < 8; i++) {
-
-            int nextRow = row + dx[i];
-            int nextColumn = column + dy[i];
-
-            if (nextRow >= 1 && nextRow <= 8 && nextColumn >= 1 && nextColumn <= 8)
-{
-                result += 1;
+        for(int i=0; i <N; i++){
+            String str = scanner.nextLine();
+            for(int j=0; j<M; j++){
+                graph[i][j] = str.charAt(j) - '0';
             }
         }
-        System.out.println(result);
+        scanner.close();
+
+int result = 0;
+
+        for(int i=0; i <N; i++){
+            for(int j=0; j<M; j++){
+
+                if(dfs(i, j)){
+                    result+=1;
+                }
+            }
+        }
+            System.out.println(result);
+
+    public static boolean dfs(int x, int y){
+
+        if(x <= -1 || x>= N || y <= -1 || y >= M)
+            return false;
+
+        if(graph[x][y] == 0){
+
+            graph[x][y] = 1;
+            dfs(x -1, y);
+            dfs(x, y -1);
+            dfs(x + 1, y );
+            dfs(x, y + 1);
+            return true;
+        }
+        return false;
     }
 }
