@@ -2,20 +2,37 @@
 
 using namespace std;
 
-bool visited[9];
-int graph[9][3] = {{}, {2,3,8}, {1,7}, {1,4,5}, {3,5}, {3,4}, {7}, {2,6,8}, {1,7}};
+int n;
+string plans;
+int x = 1, y = 1;
 
-void dfs(int x) {
-    visited[x] = true;
-    cout << x << ' ';
-    for (int node : graph[x]) {
-
-        if(!visited[node]) {
-            dfs(node);
-        }
-    }
-}
+int dx[4] = {0, 0, -1, 1};
+int dy[4] = {-1, 1, 0, 0};
+char moveTypes[4] = {'L', 'R', 'U', 'D'};
 
 int main(void) {
-    dfs(1); 
+    cin >> n;
+    cin.ignore();
+    getline(cin, plans);
+
+    for (int i = 0; i < plans.size(); i++) {
+        char plan = plans[i];
+
+        int nx = -1, ny = -1;
+        for (int j = 0; j < 4; j++) {
+            if (plan == moveTypes[j]) {
+                nx = x + dx[j];
+                ny = y + dy[j]; 
+            {}    
+        }
+        if (nx < 1 || ny < 1 || nx > n || ny > n)
+continue;
+
+        x = nx;
+        y = ny;
+    }
+    cout << x << ' ' << y << '\n';
+    return 0;
 }
+
+LRUD
